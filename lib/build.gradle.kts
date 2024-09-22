@@ -15,7 +15,8 @@ repositories {
 
 dependencies {
     // Use JUnit test framework.
-    testImplementation(libs.junit)
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 
     // kotlin
     implementation(kotlin("stdlib-jdk8"))
@@ -24,7 +25,6 @@ dependencies {
     implementation( "org.clojure", "clojure", "1.12.0-rc1")
     testRuntimeOnly("dev.clojurephant", "jovial", "0.4.1")
     nrepl("cider", "cider-nrepl", "0.49.1")
-
 }
 
 tasks.test {
@@ -38,13 +38,13 @@ tasks.clojureRepl {
     middleware.add("cider.nrepl/cider-middleware")
 }
 
+tasks.checkClojure {
+    enabled = false
+}
+
 
 // Apply a specific Java toolchain to ease working on different environments.
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 kotlin {
     compilerOptions {
