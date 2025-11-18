@@ -1,0 +1,14 @@
+{
+  "mcp": {
+    "allowed": ["clojure-mcp"]
+  },
+  "mcpServers": {
+    "clojure-mcp": {
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "PORT=$(cat .nrepl-port 2>/dev/null); clojure -X:mcp :port $PORT"
+      ]
+    }
+  }
+}
